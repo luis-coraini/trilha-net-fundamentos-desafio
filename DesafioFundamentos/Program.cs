@@ -1,4 +1,5 @@
-﻿using DesafioFundamentos.Models;
+﻿using System.Net.NetworkInformation;
+using DesafioFundamentos.Models;
 
 // Coloca o encoding para UTF8 para exibir acentuação
 Console.OutputEncoding = System.Text.Encoding.UTF8;
@@ -6,12 +7,49 @@ Console.OutputEncoding = System.Text.Encoding.UTF8;
 decimal precoInicial = 0;
 decimal precoPorHora = 0;
 
-Console.WriteLine("Seja bem vindo ao sistema de estacionamento!\n" +
-                  "Digite o preço inicial:");
-precoInicial = Convert.ToDecimal(Console.ReadLine());
+Console.WriteLine("Seja bem vindo ao sistema de estacionamento!");
 
+
+Console.WriteLine("Digite o preço inicial:");
+bool precoInicialValido = false;
+
+while (!precoInicialValido)
+{
+
+    try
+    {
+        precoInicial = Convert.ToDecimal(Console.ReadLine());
+        precoInicialValido = true;
+        Console.Clear();
+    }
+    catch
+    {
+        Console.Clear();
+        precoInicialValido = false;
+        Console.WriteLine("Informe um preço inicial válido:");
+    }
+}
+
+Console.Clear();
 Console.WriteLine("Agora digite o preço por hora:");
-precoPorHora = Convert.ToDecimal(Console.ReadLine());
+bool precoPorHoraValido = false;
+
+while (!precoPorHoraValido)
+{
+
+    try
+    {
+        precoPorHora = Convert.ToDecimal(Console.ReadLine());
+        precoPorHoraValido = true;
+        Console.Clear();
+    }
+    catch
+    {
+        Console.Clear();
+        precoPorHoraValido = false;
+        Console.WriteLine("Informe um preço por hora válido:");
+    }
+}
 
 // Instancia a classe Estacionamento, já com os valores obtidos anteriormente
 Estacionamento es = new Estacionamento(precoInicial, precoPorHora);
@@ -48,12 +86,16 @@ while (exibirMenu)
             break;
 
         default:
+            Console.Clear();
             Console.WriteLine("Opção inválida");
             break;
     }
 
     Console.WriteLine("Pressione uma tecla para continuar");
     Console.ReadLine();
+    Console.Clear();
 }
 
+Console.Clear();
 Console.WriteLine("O programa se encerrou");
+
